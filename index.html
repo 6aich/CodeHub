@@ -1,33 +1,100 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>GoldCode</title>
+<title>GoldCode Editor</title>
 
 <style>
 body{
-background:black;
+margin:0;
+font-family:monospace;
+background:#1e1e1e;
 color:white;
-font-family:Arial;
 display:flex;
 flex-direction:column;
-justify-content:center;
-align-items:center;
 height:100vh;
 }
 
-.logo{
-font-size:4em;
-color:gold;
-text-shadow:2px 2px 5px white;
+/* Top bar */
+
+.topbar{
+background:#333;
+padding:8px 15px;
+display:flex;
+gap:20px;
+font-size:14px;
 }
 
-button{
-margin-top:20px;
-padding:10px 20px;
-font-size:18px;
-background:gold;
+/* Layout */
+
+.container{
+display:grid;
+grid-template-columns:200px 1fr 1fr;
+flex:1;
+}
+
+/* Explorer */
+
+.explorer{
+background:#252526;
+padding:10px;
+border-right:1px solid #444;
+}
+
+.explorer h3{
+margin-top:0;
+}
+
+.file{
+padding:5px;
+cursor:pointer;
+}
+
+.file:hover{
+background:#333;
+}
+
+/* Editor */
+
+.editor{
+background:#1e1e1e;
+border-right:1px solid #444;
+}
+
+textarea{
+width:100%;
+height:100%;
+background:#1e1e1e;
+color:#9cdcfe;
 border:none;
+outline:none;
+padding:10px;
+font-size:14px;
+}
+
+/* Preview */
+
+.preview{
+background:white;
+}
+
+iframe{
+width:100%;
+height:100%;
+border:none;
+}
+
+/* Run button */
+
+.run{
+position:absolute;
+top:8px;
+right:10px;
+background:#0e639c;
+border:none;
+padding:6px 12px;
+color:white;
 cursor:pointer;
 }
 </style>
@@ -35,15 +102,52 @@ cursor:pointer;
 
 <body>
 
-<div class="logo">GoldCode</div>
+<div class="topbar">
+File
+Edit
+View
+Run
+Terminal
+Help
+<button class="run" onclick="runCode()">Run</button>
+</div>
 
-<input placeholder="Email"><br><br>
-<input placeholder="Username"><br><br>
-<input placeholder="Password" type="password"><br><br>
+<div class="container">
 
-<a href="dashboard.html">
-<button>Enter GoldCode</button>
-</a>
+<div class="explorer">
+<h3>Explorer</h3>
+
+<div class="file">index.html</div>
+<div class="file">style.css</div>
+<div class="file">script.js</div>
+
+</div>
+
+<div class="editor">
+
+<textarea id="code">
+enter file contents here
+</textarea>
+
+</div>
+
+<div class="preview">
+
+<iframe id="preview"></iframe>
+
+</div>
+
+</div>
+
+<script>
+
+function runCode(){
+let code=document.getElementById("code").value;
+document.getElementById("preview").srcdoc=code;
+}
+
+</script>
 
 </body>
 </html>
+```
